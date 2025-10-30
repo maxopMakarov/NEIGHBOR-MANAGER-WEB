@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { AuthNewUser } from "../services/auth.types"
-import { registerUser } from "../services/api";
+import { AuthLogin, AuthNewUser } from "../services/auth.types"
+import { loginUser, registerUser } from "../services/authApi";
 
 export const useQueryRegister = () => {
     const queryClient = useQueryClient();
@@ -12,3 +12,15 @@ export const useQueryRegister = () => {
         }
     });
 }
+
+export const useQueryLogin = () => {
+    
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: loginUser,
+        onSuccess: () => {
+            queryClient.invalidateQueries();
+        },
+  });
+};

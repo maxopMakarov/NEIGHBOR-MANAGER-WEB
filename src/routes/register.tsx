@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { RegisterForm } from '../components/Authentication/RegisterForm'
 import { AuthNewUser } from '../services/auth.types'
 import { useQueryRegister } from '../hooks/useQueryRegister'
@@ -11,12 +11,13 @@ export const Route = createFileRoute('/register')({
 })
 
 function RegisterComponent() {
+  const navigate = useNavigate();
     const {mutate: registerUser, status: registerStatus} = useQueryRegister();
 
     const handleLogin = async (data: AuthNewUser) => {
         registerUser(data, {
             onSuccess: () => {
-                console.log('User registered successfully')
+                navigate({to: '/login'});
             },
         });
     }
