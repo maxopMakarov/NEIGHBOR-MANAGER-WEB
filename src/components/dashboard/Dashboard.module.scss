@@ -1,0 +1,28 @@
+.dashboardLayout{
+    display: grid;
+    grid-template-rows: max-content auto max-content;
+    min-height: 100vh;
+}
+.header{
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    padding: 1rem;
+    border-bottom: 1px solid #d1d0d0;
+    position: sticky;
+}
+.main{
+    background-color: #f7f7f2;
+}
+.logoutText{
+    @media screen and (max-width: 500px) {
+        display: none;
+    }
+}
+.logoutIcon{
+    @media screen and (min-width: 500px) {
+        display: none;
+    }
+}
+.footer{
+    border-top: 1px solid #d1d0d0;
+}

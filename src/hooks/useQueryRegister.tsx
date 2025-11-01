@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { AuthLogin, AuthNewUser } from "../services/auth.types"
+import { AuthNewUser } from "../services/auth.types"
 import { loginUser, registerUser } from "../services/authApi";
+import { logoutUser } from "../services/userApi";
 
 export const useQueryRegister = () => {
     const queryClient = useQueryClient();
@@ -24,3 +25,14 @@ export const useQueryLogin = () => {
         },
   });
 };
+
+export const useLogout = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: logoutUser,
+        onSuccess: () => {
+            queryClient.invalidateQueries();
+        }
+    });
+};
+

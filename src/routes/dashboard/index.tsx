@@ -1,5 +1,6 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { getLoggedUser } from '../../services/userApi';
+import DashboardLayout from '../../components/dashboard/DashboardLayout';
 
 export const Route = createFileRoute('/dashboard/')({
     loader: async () => {
@@ -17,5 +18,9 @@ export const Route = createFileRoute('/dashboard/')({
 function RouteComponent() {
     const { user } = Route.useLoaderData()
 
-    return <div>Hello {user.name}</div>
+    return (
+        <DashboardLayout>
+            <div>Hello {user.name}</div>
+        </DashboardLayout>
+    );
 }
