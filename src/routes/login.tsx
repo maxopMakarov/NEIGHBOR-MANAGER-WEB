@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
-import { Form } from '../components/Authentication/LoginForm'
+import { LoginForm } from '../components/Authentication/LoginForm'
 import { AuthLogin } from '../services/auth.types'
 import { useQueryLogin } from '../hooks/useQueryRegister'
 
@@ -30,7 +30,7 @@ function LoginComponent() {
           <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-black">Sign in to your account</h2>
         </div>
 
-        <Form onSubmit={handleLogin} submitting={loginStatus === 'pending'} />
+        <LoginForm onSubmit={handleLogin} submitting={loginStatus === 'pending'} />
       </div>
     </>
   )
