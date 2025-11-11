@@ -23,7 +23,6 @@ function RouteComponent() {
         <DashboardLayout user={user}>
             <>
                 <Outlet />
-                <div>hello {user.name}</div>
             </>
         </DashboardLayout>
     );

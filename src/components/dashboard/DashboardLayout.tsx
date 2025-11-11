@@ -5,7 +5,7 @@ import styles from './Dashboard.module.scss';
 
 const logoUrl = new URL('../../assets/TramuntanaLogo.jpg', import.meta.url).href
 
-const DashboardLayout: React.FC<{ children: React.ReactNode; user?: any }> = ({ children }) => {
+const DashboardLayout: React.FC<{ children: React.ReactNode; user?: any }> = ({ children, user }) => {
     const { mutate: logoutSession, status: logoutStatus } = useLogout();
     const navigate = useNavigate();
 
@@ -50,8 +50,11 @@ const DashboardLayout: React.FC<{ children: React.ReactNode; user?: any }> = ({ 
                     </svg>}
                 </button>
             </header>
-            <main className={styles.main}>{children}</main>
-            <footer className={styles.footer}>
+            <main className={styles.main}>
+                <h1>hello {user?.name}</h1>
+                {children}
+            </main>
+            <footer role='footer' className={styles.footer}>
                 <p>Dashboard Footer</p>
                 {/* Add any common footer elements here */}
             </footer>
