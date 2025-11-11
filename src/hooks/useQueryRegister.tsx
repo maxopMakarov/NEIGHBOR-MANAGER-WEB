@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { AuthNewUser } from "../services/auth.types"
-import { loginUser, registerUser } from "../services/authApi";
+import { loginUser, loginWithMetaMask, registerUser } from "../services/authApi";
 import { logoutUser } from "../services/userApi";
 
 export const useQueryRegister = () => {
@@ -20,6 +20,18 @@ export const useQueryLogin = () => {
 
     return useMutation({
         mutationFn: loginUser,
+        onSuccess: () => {
+            queryClient.invalidateQueries();
+        },
+  });
+};
+
+export const useMetamaskLogin = () => {
+    
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: loginWithMetaMask,
         onSuccess: () => {
             queryClient.invalidateQueries();
         },

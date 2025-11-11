@@ -5,17 +5,17 @@ import styles from './Dashboard.module.scss';
 
 const logoUrl = new URL('../../assets/TramuntanaLogo.jpg', import.meta.url).href
 
-const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const DashboardLayout: React.FC<{ children: React.ReactNode; user?: any }> = ({ children }) => {
     const { mutate: logoutSession, status: logoutStatus } = useLogout();
     const navigate = useNavigate();
 
-const handleLogout = () => {
-  logoutSession(undefined, {
-    onSuccess: () => {
-      navigate({ to: '/login' });
-    },
-  });
-};
+    const handleLogout = () => {
+    logoutSession(undefined, {
+        onSuccess: () => {
+            navigate({ to: '/login' });
+        },
+    });
+    };
     return (
         <div className={styles.dashboardLayout}>
             <header className={styles.header}>

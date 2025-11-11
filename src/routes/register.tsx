@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { RegisterForm } from '../components/Authentication/RegisterForm'
 import { AuthNewUser } from '../services/auth.types'

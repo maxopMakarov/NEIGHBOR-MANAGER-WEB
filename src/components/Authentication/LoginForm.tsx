@@ -1,8 +1,9 @@
-import { Link } from '@tanstack/react-router'
+import { Link, useNavigate } from '@tanstack/react-router'
 import React, { useState } from 'react'
 import styles from './AuthForms.module.scss';
 import SVGIcon from '../../assets/MetaMask-icon-fox.svg?react'
 import SVGIconLoading from '../../assets/loading-icon.svg?react'
+import { useMetamaskLogin } from '../../hooks/useQueryRegister';
 
 interface LoginFormProps {
   onSubmit: (data: any) => void,
@@ -10,13 +11,24 @@ interface LoginFormProps {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({onSubmit, submitting}) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const {mutate: loginUser, status: loginStatus} = useMetamaskLogin();
+    const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    onSubmit({ email, password })
-  }
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+        onSubmit({ email, password })
+    }
+
+    const handleMetamaskLogin = async () => {
+        loginUser(undefined, {
+            onSuccess: () => {
+                navigate({to: '/dashboard'});
+            },
+        });
+    }
+
 
   return (
     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -70,7 +82,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({onSubmit, submitting}) => {
         </form>
         <div className={styles.otherLogins}>
             <button className="relative inline-flex items-center justify-center p-0.5 mt-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500
-             hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+             hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800" 
+             onClick={handleMetamaskLogin}>
                 <span className="flex  w-100 px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
                     <SVGIcon className="ml-auto w-5 h-5 me-2"/>
                     <span className="mr-auto">Metamask Sign in</span>
