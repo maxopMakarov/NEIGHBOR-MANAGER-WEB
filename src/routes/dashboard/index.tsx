@@ -21,9 +21,7 @@ function RouteComponent() {
 
     return (
         <DashboardLayout user={user}>
-            <>
-                <Outlet />
-            </>
+            <Outlet />
         </DashboardLayout>
     );
 }
